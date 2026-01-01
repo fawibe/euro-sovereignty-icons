@@ -19,7 +19,7 @@ jobs:
       - name: Generate Font
         run: |
           mkdir -p dist
-          npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 css
+          npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 --asset-types css
 
       - name: Commit and Push
         run: |
