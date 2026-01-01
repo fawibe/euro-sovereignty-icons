@@ -1,0 +1,21 @@
+name: Generate Icon Font
+on:
+  push:
+    paths:
+      - 'icons/**' # Se lance uniquement si vous ajoutez/modifiez un SVG
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 css
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist/
+          git commit -m "Automated font generation" || exit 0
+          git push
