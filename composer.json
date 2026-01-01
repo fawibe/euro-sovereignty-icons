@@ -2,6 +2,9 @@
     "name": "fawibe/euro-sovereignty-icons",
     "description": "Digital sovereignty icon font for Europe and Switzerland",
     "type": "library",
-    "license": "MIT",
-    "require": {}
+    "license": "CC-BY-4.0",
+    "require": {},
+    "autoload": {
+        "classmap": ["dist/"]
+    }
 }
