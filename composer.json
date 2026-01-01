@@ -4,7 +4,4 @@
     "type": "library",
     "license": "CC-BY-4.0",
     "require": {},
-    "autoload": {
-        "classmap": ["dist/"]
-    }
 }
