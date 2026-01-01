@@ -1,8 +1,5 @@
 name: Generate Icon Font
-on:
-  push:
-    paths:
-      - 'icons/**'
+on: [push] # Se déclenchera à CHAQUE modification sur n'importe quelle branche
 
 permissions:
   contents: write
@@ -11,7 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -19,7 +17,9 @@ jobs:
           node-version: '18'
 
       - name: Generate Font
-        run: npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 css
+        run: |
+          mkdir -p dist
+          npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 css
 
       - name: Commit and Push
         run: |
