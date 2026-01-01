@@ -3,7 +3,7 @@
     src: url("./euro-icons.woff2?970b6501b9968e8f7ae648e59f259c5c") format("woff2");
 }
 
-i[class^="icon-"]:before, i[class*=" icon-"]:before {
+i[class^="euro-icons--"]:before, i[class*=" euro-icons--"]:before {
     font-family: euro-icons !important;
     font-style: normal;
     font-weight: normal !important;
@@ -14,12 +14,12 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-rgpd-shield1:before {
+.euro-icons--rgpd-shield1:before {
     content: "\f101";
 }
-.icon-logo_mistralai:before {
+.euro-icons--logo_mistralai:before {
     content: "\f102";
 }
-.icon-logo_kesselmedia:before {
+.euro-icons--logo_kesselmedia:before {
     content: "\f103";
 }
