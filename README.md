@@ -39,8 +39,9 @@ Vous avez besoin d'une icône spécifique ou vous souhaitez contribuer ? Les sug
 
 ## ☕ Soutenir le projet
 
-Ce projet est maintenu bénévolement. Si vous appréciez ce travail, vous pouvez m'aider à ajouter de nouvelles icônes :
-
+Ce projet est maintenu bénévolement. 
+Si vous appréciez ce travail, vous pouvez : 
+- m'aider à ajouter de nouvelles icônes
 - Devenir Sponsor sur GitHub : https://github.com/sponsors/fawibe
 
 ## ⚖️ Licence
