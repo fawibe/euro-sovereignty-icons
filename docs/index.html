@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euro Sovereignty Icons</title>
-    <link rel="stylesheet" href="https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.css">
+    <script>
+    // Injection dynamique du CSS avec un "Cache Buster" (timestamp)
+    const iconStyles = document.createElement('link');
+    iconStyles.rel = 'stylesheet';
+    // Le "?t=" + Date.now() garantit que le fichier n'est jamais lu depuis le cache
+    iconStyles.href = 'https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.css?t=' + Date.now();
+    document.head.appendChild(iconStyles);
+</script>
     <style>
     @font-face {
         font-family: 'euro-icons';
