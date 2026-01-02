@@ -1,8 +1,8 @@
 @font-face {
     font-family: "euro-icons";
-    src: url("./euro-icons.ttf?d118a39d7eca0e24f109b65e4393d3b5") format("truetype"),
-url("./euro-icons.woff?d118a39d7eca0e24f109b65e4393d3b5") format("woff"),
-url("./euro-icons.woff2?d118a39d7eca0e24f109b65e4393d3b5") format("woff2");
+    src: url("./euro-icons.ttf?856b3f554d2ca74bfa63b3368479a558") format("truetype"),
+url("./euro-icons.woff?856b3f554d2ca74bfa63b3368479a558") format("woff"),
+url("./euro-icons.woff2?856b3f554d2ca74bfa63b3368479a558") format("woff2");
 }
 
 .esi:before {
@@ -16,18 +16,51 @@ url("./euro-icons.woff2?d118a39d7eca0e24f109b65e4393d3b5") format("woff2");
     -moz-osx-font-smoothing: grayscale;
 }
 
-.esi.esi-logo-mistralai:before {
+.esi.esi-logo-tuta:before {
     content: "\f101";
 }
-.esi.esi-logo-kesselmedia:before {
+.esi.esi-logo-qwant:before {
     content: "\f102";
 }
-.esi.esi-euro-gdpr2-fr:before {
+.esi.esi-logo-protonmail:before {
     content: "\f103";
 }
-.esi.esi-euro-gdpr:before {
+.esi.esi-logo-pixelfed:before {
     content: "\f104";
 }
-.esi.esi-euro-gdpr-fr:before {
+.esi.esi-logo-ovh:before {
     content: "\f105";
+}
+.esi.esi-logo-mistralai:before {
+    content: "\f106";
+}
+.esi.esi-logo-malt:before {
+    content: "\f107";
+}
+.esi.esi-logo-libreoffice:before {
+    content: "\f108";
+}
+.esi.esi-logo-kesselmedia:before {
+    content: "\f109";
+}
+.esi.esi-logo-ecosia:before {
+    content: "\f10a";
+}
+.esi.esi-logo-deepl:before {
+    content: "\f10b";
+}
+.esi.esi-logo-brevo:before {
+    content: "\f10c";
+}
+.esi.esi-logo-bereal:before {
+    content: "\f10d";
+}
+.esi.esi-euro-gdpr2-fr:before {
+    content: "\f10e";
+}
+.esi.esi-euro-gdpr:before {
+    content: "\f10f";
+}
+.esi.esi-euro-gdpr-fr:before {
+    content: "\f110";
 }
