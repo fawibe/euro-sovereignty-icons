@@ -17,31 +17,47 @@
     <h1>Euro Sovereignty Icons</h1>
     <div id="gallery" class="grid">Chargement des icônes...</div>
 
-    <script>
-        // On va chercher le JSON généré par Fantasticon
-        fetch('/euro-sovereignty-icons/dist/euro-icons.json')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('gallery');
-                container.innerHTML = ''; // On vide le message de chargement
+<script>
+    // Utilisation du lien CDN jsDelivr pour être sûr de trouver le fichier
+    fetch('https://cdn.jsdelivr.net/gh/fawibe/euro-sovereignty-icons@main/dist/euro-icons.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Fichier JSON non trouvé');
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('gallery');
+            container.innerHTML = ''; 
+            
+            // On s'adapte au format des données (Tableau ou Objet)
+            const iconNames = Array.isArray(data) ? data : Object.keys(data);
+            
+            if (iconNames.length === 0) {
+                container.innerHTML = '<p>Aucune icône trouvée dans le fichier.</p>';
+                return;
+            }
+
+            iconNames.forEach(iconName => {
+                const card = document.createElement('div');
+                card.className = 'card';
                 
-                Object.keys(data).forEach(iconName => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    // Au clic, on copie le code dans le presse-papier
-                    card.onclick = () => {
-                        const code = `<i class="esi esi-${iconName}"></i>`;
-                        navigator.clipboard.writeText(code);
-                        alert(`Copié : ${code}`);
-                    };
-                    
-                    card.innerHTML = `
-                        <i class="esi esi-${iconName}"></i>
-                        <p>${iconName}</p>
-                    `;
-                    container.appendChild(card);
-                });
+                // Au clic, on copie le code HTML
+                card.onclick = () => {
+                    const code = `<i class="esi esi-${iconName}"></i>`;
+                    navigator.clipboard.writeText(code);
+                    alert(`Copié : ${code}`);
+                };
+                
+                card.innerHTML = `
+                    <i class="esi esi-${iconName}"></i>
+                    <p>${iconName}</p>
+                `;
+                container.appendChild(card);
             });
-    </script>
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            document.getElementById('gallery').innerHTML = '<p style="color:red">Erreur de chargement des icônes. Vérifie la console (F12).</p>';
+        });
+</script>
 </body>
 </html>
