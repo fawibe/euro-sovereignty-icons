@@ -1,5 +1,5 @@
 name: Generate Icon Font
-on: [push] # Se déclenchera à CHAQUE modification sur n'importe quelle branche
+on: [push]
 
 permissions:
   contents: write
@@ -26,5 +26,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add dist/
-          git commit -m "Automated font generation" || exit 0
+          git commit -m "Automated font generation [skip ci]" || exit 0
           git push
