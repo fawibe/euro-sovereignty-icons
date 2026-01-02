@@ -1,4 +1,4 @@
-# 🇪🇺 Euro Sovereignty Icons
+# Euro Sovereignty Icons
 
 Une bibliothèque d'icônes moderne et légère dédiée à la souveraineté numérique européenne, à la protection des données (RGPD) et aux acteurs technologiques du continent.
 
@@ -28,9 +28,9 @@ Pour maintenir une bibliothèque cohérente, merci de respecter cette logique de
 ## 💡 Suggestions & Contributions
 
 Vous avez besoin d'une icône spécifique ou vous souhaitez contribuer ? Les suggestions sont les bienvenues !
-
 1. Ouvrez une "Issue" pour suggérer un nouveau concept ou une marque à intégrer.
 2. Proposez vos fichiers SVG via une Pull Request dans le dossier icons/.
+Note sur les contributions : Pour garantir une cohérence visuelle et une qualité technique irréprochable, chaque icône est soumise à validation. Je vérifie personnellement chaque tracé avant l'intégration finale.
 
 ### Format technique des SVG (Impératif) :
 - Tracés uniquement (Outlines) : Convertissez impérativement tous les textes et contours (strokes) en fonds/chemins (paths).
