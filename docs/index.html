@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Euro Sovereignty Icons - Galerie</title>
-    <link rel="stylesheet" href="../dist/euro-icons.css">
+    <link rel="stylesheet" href="/euro-sovereignty-icons/dist/euro-icons.css">
     <style>
         body { font-family: sans-serif; padding: 40px; background: #f4f7f9; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
@@ -19,7 +19,7 @@
 
     <script>
         // On va chercher le JSON généré par Fantasticon
-        fetch('../dist/euro-icons.json')
+        fetch('/euro-sovereignty-icons/dist/euro-icons.json')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('gallery');
