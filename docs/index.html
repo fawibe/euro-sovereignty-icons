@@ -4,34 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euro Sovereignty Icons</title>
-    
     <link rel="stylesheet" href="https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.css">
-
     <style>
-        /* 2. FORCE le chargement des fichiers de police depuis le CDN */
-        @font-face {
-            font-family: 'euro-icons';
-            src: url('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.woff2') format('woff2'),
-                 url('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.woff') format('woff'),
-                 url('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: block;
-        }
-
-        /* 3. DESIGN de la page et de la grille */
-        body {
-            font-family: sans-serif;
-            padding: 40px;
-            background-color: #f4f7f9;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
+    @font-face {
+        font-family: 'euro-icons';
+        /* On ajoute un paramètre de version pour forcer le rafraîchissement des glyphes */
+        src: url('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.woff2?v=1.0.1') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+    body {
+        font-family: sans-serif;
+        padding: 40px;
+        background-color: #f4f7f9;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
 
         .card {
             background: white;
@@ -75,7 +68,6 @@
     </style>
 </head>
     <script>
-    // Récupérer la dernière version depuis l'API GitHub
     fetch('https://api.github.com/repos/fawibe/euro-sovereignty-icons/releases/latest')
         .then(response => {
             if (!response.ok) throw new Error('Erreur API');
@@ -99,8 +91,7 @@
     <div id="gallery" class="grid">Chargement des icônes...</div>
 
     <script>
-        // Utilisation du lien CDN jsDelivr pour récupérer la liste des icônes
-        fetch('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.json')
+        fetch('https://raw.githack.com/fawibe/euro-sovereignty-icons/main/dist/euro-icons.json?t=' + Date.now())
             .then(response => {
                 if (!response.ok) throw new Error('Fichier JSON non trouvé');
                 return response.json();
