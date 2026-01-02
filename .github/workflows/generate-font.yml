@@ -19,12 +19,18 @@ jobs:
       - name: Generate Font
         run: |
           mkdir -p dist
-          npx fantasticon icons/ -o dist/ -n euro-icons -t woff2 --asset-types css --prefix esi- --tag i --class-name esi
+          npx fantasticon@3.0.0 icons/ \
+            --output dist/ \
+            --name euro-icons \
+            --font-types ttf woff woff2 \
+            --asset-types css \
+            --prefix esi \
+            --selector .esi
 
-      - name: Commit and Push
+      - name: Commit and Push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add dist/
-          git commit -m "Automated font generation [skip ci]" || exit 0
+          git commit -m "Auto-generate fonts and CSS" || echo "No changes to commit"
           git push
