@@ -25,13 +25,12 @@ jobs:
           node-version: '18'
 
       - name: Optimize SVGs
-        # svgo nettoie les fichiers (supprime les px, les métadonnées Affinity, etc.)
+        # On force la conversion des contours en chemins si possible et on nettoie
         run: npx svgo -f icons -o icons
 
       - name: Generate Font
         run: |
           mkdir -p dist
-          # Génère la police et les fichiers CSS/JSON
           npx fantasticon@3.0.0 icons/ \
             --output dist/ \
             --name euro-icons \
@@ -44,12 +43,27 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # On ajoute icons/ et dist/ pour sauvegarder les SVGs nettoyés et la police
           git add icons/ dist/
           git commit -m "chore: optimize icons and rebuild font [skip ci]" || echo "No changes"
           git push
 
       - name: Create Version Tag
+        id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: |
+            Nouvelle mise à jour des icônes.
+            Version générée automatiquement.
+          files: |
+            dist/euro-icons.css
+            dist/euro-icons.woff2
+            dist/euro-icons.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
