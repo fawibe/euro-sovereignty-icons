@@ -1,9 +1,11 @@
 @font-face {
     font-family: "euro-icons";
-    src: url("./euro-icons.woff2?970b6501b9968e8f7ae648e59f259c5c") format("woff2");
+    src: url("./euro-icons.ttf?bbadb16042670faae5842265a86f997e") format("truetype"),
+url("./euro-icons.woff?bbadb16042670faae5842265a86f997e") format("woff"),
+url("./euro-icons.woff2?bbadb16042670faae5842265a86f997e") format("woff2");
 }
 
-i[class^="euro-icons--"]:before, i[class*=" euro-icons--"]:before {
+.esi:before {
     font-family: euro-icons !important;
     font-style: normal;
     font-weight: normal !important;
@@ -14,12 +16,15 @@ i[class^="euro-icons--"]:before, i[class*=" euro-icons--"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.euro-icons--rgpd-shield1:before {
+.esi.esi-logo_mistralai:before {
     content: "\f101";
 }
-.euro-icons--logo_mistralai:before {
+.esi.esi-logo_kesselmedia:before {
     content: "\f102";
 }
-.euro-icons--logo_kesselmedia:before {
+.esi.esi-euro-gdpr:before {
     content: "\f103";
+}
+.esi.esi-euro-gdpr-fr:before {
+    content: "\f104";
 }
