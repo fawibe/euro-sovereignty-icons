@@ -65,9 +65,26 @@
         }
     </style>
 </head>
+    <script>
+    // Récupérer la dernière version depuis l'API GitHub
+    fetch('https://api.github.com/repos/fawibe/euro-sovereignty-icons/releases/latest')
+        .then(response => {
+            if (!response.ok) throw new Error('Erreur API');
+            return response.json();
+        })
+        .then(data => {
+            // data.tag_name contient "v1.0.1" (ou la dernière version créée)
+            document.getElementById('version-tag').innerText = data.tag_name;
+        })
+        .catch(err => {
+            console.error('Impossible de charger la version:', err);
+            // Optionnel : afficher une version par défaut en cas d'erreur
+            document.getElementById('version-tag').innerText = 'v1.0.1'; 
+        });
+</script>
 <body>
 
-    <h1>Euro Sovereignty Icons</h1>
+    <h1>Euro Sovereignty Icons <span id="version-tag">...</span></h1>
     <p>Cliquez sur une carte pour copier le code HTML de l'icône.</p>
     
     <div id="gallery" class="grid">Chargement des icônes...</div>
