@@ -23,17 +23,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          #cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Optimize SVGs
+        # svgo nettoie les fichiers (supprime les px, les métadonnées Affinity, etc.)
         run: npx svgo -f icons -o icons
 
       - name: Generate Font
         run: |
           mkdir -p dist
+          # Génère la police et les fichiers CSS/JSON
           npx fantasticon@3.0.0 icons/ \
             --output dist/ \
             --name euro-icons \
@@ -46,7 +44,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add icons/ dist/ # On ajoute icons/ car SVGO a modifié les sources
+          # On ajoute icons/ et dist/ pour sauvegarder les SVGs nettoyés et la police
+          git add icons/ dist/
           git commit -m "chore: optimize icons and rebuild font [skip ci]" || echo "No changes"
           git push
 
