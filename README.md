@@ -9,6 +9,10 @@ C'est la méthode la plus simple pour utiliser les icônes immédiatement. Copie
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fawibe/euro-sovereignty-icons@main/dist/euro-icons.css">
 ```
 
+🖼 Galerie des icônes
+Retrouvez la liste complète des icônes disponibles et copiez leurs codes en un clic ici :
+👉 Découvrez la [galerie d'icônes](https://fawibe.github.io/euro-sovereignty-icons/) en ligne.
+
 ## 🛠 Utilisation
 
 Utilisez la classe de base "esi" suivie du nom de l'icône souhaitée :
@@ -28,7 +32,7 @@ Pour maintenir une bibliothèque cohérente, merci de respecter cette logique de
 ## 💡 Suggestions & Contributions
 
 Vous avez besoin d'une icône spécifique ou vous souhaitez contribuer ? Les suggestions sont les bienvenues !
-1. Ouvrez une "Issue" pour suggérer un nouveau concept ou une marque à intégrer.
+1. Ouvrez une ["Issue"](https://github.com/fawibe/euro-sovereignty-icons/issues/new) pour suggérer un nouveau concept ou une marque à intégrer.
 2. Proposez vos fichiers SVG via une Pull Request dans le dossier icons/.
 Note sur les contributions : Pour garantir une cohérence visuelle et une qualité technique irréprochable, chaque icône est soumise à validation. Je vérifie personnellement chaque tracé avant l'intégration finale.
 
