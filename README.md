@@ -5,17 +5,18 @@ Une bibliothèque d'icônes moderne et légère dédiée à la souveraineté num
 ## 🚀 Installation Rapide (via CDN)
 
 C'est la méthode la plus simple pour utiliser les icônes immédiatement. Copiez cette ligne dans la balise <head> de votre fichier HTML :
-
+```text
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fawibe/euro-sovereignty-icons@main/dist/euro-icons.css">
+```
 
 ## 🛠 Utilisation
 
 Utilisez la classe de base "esi" suivie du nom de l'icône souhaitée :
-
+```text
+<i class="esi esi-euro-gdpr"></i>
 <i class="esi esi-euro-gdpr-fr"></i>
-
-<i class="esi esi-logo-mistral"></i>
-
+<i class="esi esi-logo-mistralai"></i>
+```
 ## 📂 Nomenclature des fichiers
 
 Pour maintenir une bibliothèque cohérente, merci de respecter cette logique de nommage pour vos fichiers SVG :
@@ -41,8 +42,8 @@ Vous avez besoin d'une icône spécifique ou vous souhaitez contribuer ? Les sug
 Ce projet est maintenu bénévolement. Si vous appréciez ce travail, vous pouvez m'aider à ajouter de nouvelles icônes :
 
 - Devenir Sponsor sur GitHub : https://github.com/sponsors/fawibe
-- M'offrir un café : https://www.buymeacoffee.com/fawibe
 
 ## ⚖️ Licence
 
-Ce projet est sous licence MIT. Les polices générées sont distribuées sous licence CC by 4.0
+Ce projet et ses icônes sont protégés par la licence **CC BY 4.0 - Fabrice Willot**. 
+Les fichiers de police générés (Webfonts) sont distribués sous licence **SIL OFL 1.1**.
