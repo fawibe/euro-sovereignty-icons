@@ -1,8 +1,11 @@
 name: Generate Icon Font
 on: 
   push:
+    branches:
+      - main
     paths:
-      - 'icons/**' # L'action ne se lance que si tu modifies les icônes
+      - 'icons/**'
+      - 'package.json'
 
 permissions:
   contents: write
@@ -13,11 +16,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Optimize SVGs
+        run: npx svgo -f icons -o icons
 
       - name: Generate Font
         run: |
@@ -34,7 +46,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dist/
-          # [skip ci] permet d'éviter les boucles infinies de commits
-          git commit -m "chore: auto-generate fonts and CSS [skip ci]" || echo "No changes to commit"
+          git add icons/ dist/ # On ajoute icons/ car SVGO a modifié les sources
+          git commit -m "chore: optimize icons and rebuild font [skip ci]" || echo "No changes"
           git push
+
+      - name: Create Version Tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
