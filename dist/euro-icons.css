@@ -1,8 +1,8 @@
 @font-face {
     font-family: "euro-icons";
-    src: url("./euro-icons.ttf?8b01807a487713c23c6e4147b4eac223") format("truetype"),
-url("./euro-icons.woff?8b01807a487713c23c6e4147b4eac223") format("woff"),
-url("./euro-icons.woff2?8b01807a487713c23c6e4147b4eac223") format("woff2");
+    src: url("./euro-icons.ttf?ac1526633419671e121bc5c56a949ae1") format("truetype"),
+url("./euro-icons.woff?ac1526633419671e121bc5c56a949ae1") format("woff"),
+url("./euro-icons.woff2?ac1526633419671e121bc5c56a949ae1") format("woff2");
 }
 
 .esi:before {
@@ -22,9 +22,12 @@ url("./euro-icons.woff2?8b01807a487713c23c6e4147b4eac223") format("woff2");
 .esi.esi-logo-kesselmedia:before {
     content: "\f102";
 }
-.esi.esi-euro-gdpr:before {
+.esi.esi-euro-gdpr2-fr:before {
     content: "\f103";
 }
-.esi.esi-euro-gdpr-fr:before {
+.esi.esi-euro-gdpr:before {
     content: "\f104";
+}
+.esi.esi-euro-gdpr-fr:before {
+    content: "\f105";
 }
