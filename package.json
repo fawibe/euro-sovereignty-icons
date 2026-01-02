@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "Bibliothèque d'icônes dédiée à la souveraineté numérique européenne et au RGPD.",
   "author": "Fabrice Willot",
-  "license": "MIT",
+  "license": "CC by 4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/fawibe/euro-sovereignty-icons.git"
   },
   "scripts": {
-    "build": "fantasticon icons/ -o dist/ -n euro-icons -t woff2 woff ttf -a css json --prefix esi --selector .esi"
+    "optimize": "svgo -f icons -o icons",
+    "build:font": "fantasticon icons/ -o dist/ -n euro-icons -t woff2 woff ttf -a css json --prefix esi --selector .esi",
+    "build": "npm run optimize && npm run build:font"
   },
   "devDependencies": {
-    "fantasticon": "^3.0.0"
+    "fantasticon": "^3.0.0",
+    "svgo": "^3.0.0"
   }
 }
