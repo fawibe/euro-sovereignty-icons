@@ -41,7 +41,9 @@ jobs:
             --asset-types css json \
             --prefix esi \
             --selector .esi
-
+            --normalize \
+            --descent 200
+            
       - name: Commit and Push changes
         id: commit_step
         run: |
