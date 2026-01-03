@@ -1,8 +1,8 @@
 @font-face {
     font-family: "euro-icons";
-    src: url("./euro-icons.ttf?927f31e8c0ab578015ddd5fb1bc4c8b6") format("truetype"),
-url("./euro-icons.woff?927f31e8c0ab578015ddd5fb1bc4c8b6") format("woff"),
-url("./euro-icons.woff2?927f31e8c0ab578015ddd5fb1bc4c8b6") format("woff2");
+    src: url("./euro-icons.ttf?7f1306428a990d50ce5c27a492434885") format("truetype"),
+url("./euro-icons.woff?7f1306428a990d50ce5c27a492434885") format("woff"),
+url("./euro-icons.woff2?7f1306428a990d50ce5c27a492434885") format("woff2");
 }
 
 .esi:before {

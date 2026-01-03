@@ -1,1 +1,8 @@
-
+{
+  "name": "euro-icons",
+  "version": "1.0.0",
+  "icons": 16,
+  "license": "MIT",
+  "prefix": "esi",
+  "generatedAt": "2026-01-03T13:21:26.897Z"
+}
