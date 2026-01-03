@@ -1,19 +1,29 @@
 @font-face {
-    font-family: "euro-icons";
-    src: url("./euro-icons.ttf?7f1306428a990d50ce5c27a492434885") format("truetype"),
-url("./euro-icons.woff?7f1306428a990d50ce5c27a492434885") format("woff"),
-url("./euro-icons.woff2?7f1306428a990d50ce5c27a492434885") format("woff2");
+  font-family: "euro-icons";
+  src:
+    url("./euro-icons.woff2?7f1306428a990d50ce5c27a492434885") format("woff2"),
+    url("./euro-icons.woff?7f1306428a990d50ce5c27a492434885") format("woff");
+  font-display: block;
 }
 
-.esi:before {
-    font-family: euro-icons !important;
-    font-style: normal;
-    font-weight: normal !important;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* L’élément */
+.esi {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: -0.125em;
+}
+
+/* Le glyphe */
+.esi::before {
+  font-family: "euro-icons" !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block; /* important */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .esi.esi-logo-tuta:before {
