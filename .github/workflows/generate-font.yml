@@ -1,5 +1,5 @@
 name: Generate Icon Font
-on: 
+on:
   push:
     branches:
       - main
@@ -28,7 +28,6 @@ jobs:
         run: |
           rm -rf icons-opt
           mkdir -p icons-opt
-          # optimisation basique, sans config custom pour l’instant
           npx svgo -f icons -o icons-opt --config=svgo.config.js
 
       - name: Generate Font
@@ -40,49 +39,10 @@ jobs:
             --font-types ttf woff woff2 \
             --asset-types css json \
             --prefix esi \
-            --selector .esi
+            --selector .esi \
             --normalize \
             --descent 200
-            
-      - name: Commit and Push changes
-        id: commit_step
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # On versionne uniquement les outputs
-          git add dist/
-
-          if git commit -m "chore: rebuild icon font [skip ci]"; then
-            git push
-            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          else
-            echo "No changes"
-            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Create Version Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_sha: ${{ steps.commit_step.outputs.new_commit }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-          target_commitish: ${{ steps.commit_step.outputs.new_commit }}
-          body: |
-            Nouvelle mise à jour des icônes.
-            Version : ${{ steps.tag_version.outputs.new_tag }}
-          files: |
-            dist/euro-icons.css
-            dist/euro-icons.woff2
-            dist/euro-icons.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate meta.json
         run: |
           ICON_COUNT=$(jq 'length' dist/euro-icons.json)
@@ -98,3 +58,47 @@ jobs:
             "generatedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
           }
           EOF
+
+      - name: Commit and Push changes
+        id: commit_step
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # On versionne uniquement les outputs
+          git add dist/
+
+          # On capture le hash du commit pour le réutiliser
+          if git commit -m "chore: rebuild icon font [skip ci]"; then
+            git push
+            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "No changes"
+            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Version Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # IMPORTANT : On pointe sur le commit que l'on vient de pousser !
+          commit_sha: ${{ steps.commit_step.outputs.new_commit }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          # On s'assure que la release pointe aussi sur le bon commit
+          target_commitish: ${{ steps.commit_step.outputs.new_commit }}
+          body: |
+            Nouvelle mise à jour des icônes.
+            Version : ${{ steps.tag_version.outputs.new_tag }}
+          files: |
+            dist/euro-icons.css
+            dist/euro-icons.woff2
+            dist/euro-icons.json
+            dist/meta.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
