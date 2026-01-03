@@ -49,13 +49,14 @@ jobs:
           const fs = require('fs');
 
           const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          version: process.env.RELEASE_TAG.replace(/^v/, ''),
           const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
 
           const meta = {
             name: 'euro-icons',
-            version: pkg.version,              // ✅ source de vérité
-            icons: Object.keys(icons).length,  // ✅ recalculé
-            license: 'CC BY 4.0',
+            version: pkg.version,
+            icons: Object.keys(icons).length,
+            license: 'Creative Commons Attribution 4.0 International (CC-BY-4.0)',
             author: { name: 'Fabrice Willot', url: 'https://fabrice.willot.be' },
             prefix: 'esi',
             generatedAt: new Date().toISOString()
