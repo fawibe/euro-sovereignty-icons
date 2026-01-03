@@ -83,3 +83,18 @@ jobs:
             dist/euro-icons.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate meta.json
+        run: |
+          ICON_COUNT=$(jq 'length' dist/euro-icons.json)
+          VERSION=$(jq -r '.version' package.json)
+
+          cat > dist/meta.json <<EOF
+          {
+            "name": "euro-icons",
+            "version": "$VERSION",
+            "icons": $ICON_COUNT,
+            "license": "MIT",
+            "prefix": "esi",
+            "generatedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          }
+          EOF
