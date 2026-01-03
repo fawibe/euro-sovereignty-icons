@@ -45,19 +45,29 @@ jobs:
 
       - name: Generate meta.json
         run: |
-          ICON_COUNT=$(jq 'length' dist/euro-icons.json)
-          VERSION=$(jq -r '.version' package.json)
+          node - <<'NODE'
+          const fs = require('fs');
 
-          cat > dist/meta.json <<EOF
-          {
-            "name": "euro-icons",
-            "version": "$VERSION",
-            "icons": $ICON_COUNT,
-            "license": "MIT",
-            "prefix": "esi",
-            "generatedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-          }
-          EOF
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
+
+          const meta = {
+            name: 'euro-icons',
+            version: pkg.version,
+            icons: Object.keys(icons).length,
+            license: 'MIT',
+            prefix: 'esi',
+            generatedAt: new Date().toISOString()
+          };
+
+          fs.writeFileSync(
+            'dist/meta.json',
+            JSON.stringify(meta, null, 2) + '\n',
+            'utf8'
+          );
+
+          console.log('meta.json generated:', meta);
+          NODE
 
       - name: Commit and Push changes
         id: commit_step
