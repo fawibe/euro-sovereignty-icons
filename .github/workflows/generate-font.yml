@@ -30,18 +30,20 @@ jobs:
           mkdir -p icons-opt
           npx svgo -f icons -o icons-opt --config=svgo.config.js
 
-      - name: Generate Font
-        run: |
-          mkdir -p dist
-          npx fantasticon@3.0.0 icons-opt/ \
-            --output dist/ \
-            --name euro-icons \
-            --font-types ttf woff woff2 \
-            --asset-types css json \
-            --prefix esi \
-            --selector .esi \
-            --normalize \
-            --descent 200
+- name: Generate Font
+  run: |
+    mkdir -p dist
+    npx fantasticon@3.0.0 icons-opt/ \
+      --output dist/ \
+      --name euro-icons \
+      --font-types woff woff2 \
+      --asset-types css json \
+      --prefix esi \
+      --selector .esi \
+      --normalize \
+      --descent 200 \
+      --templates templates
+
 
       - name: Generate meta.json
         run: |
