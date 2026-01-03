@@ -1,0 +1,20 @@
+/* Base icon class */
+.{{ prefix }} {
+  display: inline-block;
+  font-family: "{{ name }}";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Icon mappings */
+{{# each glyphs }}
+.{{ ../prefix }}-{{ name }}::before {
+  content: "{{ codepoint }}";
+}
+{{/ each }}
