@@ -43,30 +43,24 @@ jobs:
             --normalize \
             --descent 200
 
-      - name: Generate meta.json
+      - name: Generate meta.json (pre-tag)
         run: |
           node - <<'NODE'
           const fs = require('fs');
-
-          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
           const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
 
           const meta = {
             name: 'euro-icons',
-            version: pkg.version,
+            version: 'dev',
             icons: Object.keys(icons).length,
-            license: 'MIT',
+            license: 'CC BY 4.0',
+            author: { name: 'Fabrice Willot', url: 'https://fabrice.willot.be' },
             prefix: 'esi',
             generatedAt: new Date().toISOString()
           };
 
-          fs.writeFileSync(
-            'dist/meta.json',
-            JSON.stringify(meta, null, 2) + '\n',
-            'utf8'
-          );
-
-          console.log('meta.json generated:', meta);
+          fs.writeFileSync('dist/meta.json', JSON.stringify(meta, null, 2) + '\n', 'utf8');
+          console.log('meta.json generated (pre-tag):', meta);
           NODE
 
       - name: Commit and Push changes
@@ -75,10 +69,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # On versionne uniquement les outputs
           git add dist/
 
-          # On capture le hash du commit pour le réutiliser
           if git commit -m "chore: rebuild icon font [skip ci]"; then
             git push
             echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
@@ -92,15 +84,43 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # IMPORTANT : On pointe sur le commit que l'on vient de pousser !
           commit_sha: ${{ steps.commit_step.outputs.new_commit }}
+
+      - name: Update meta.json with tag version
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+
+          const metaPath = 'dist/meta.json';
+          const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+
+          const tag = process.env.RELEASE_TAG; // ex: "v1.0.4"
+          meta.version = tag;
+
+          fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2) + '\n', 'utf8');
+          console.log('meta.json updated with tag:', tag);
+          NODE
+        env:
+          RELEASE_TAG: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Commit meta.json version update
+        id: commit_meta_step
+        run: |
+          git add dist/meta.json
+          if git commit -m "chore: sync meta version [skip ci]"; then
+            git push
+            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "No meta changes"
+            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          # On s'assure que la release pointe aussi sur le bon commit
+          # La release pointe sur le commit taggé (celui de la font)
           target_commitish: ${{ steps.commit_step.outputs.new_commit }}
           body: |
             Nouvelle mise à jour des icônes.
