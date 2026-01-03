@@ -1,11 +1,14 @@
 name: Generate Icon Font
+
 on:
   push:
     branches:
       - main
     paths:
-      - 'icons/**'
-      - 'package.json'
+      - "icons/**"
+      - "package.json"
+      - "svgo.config.js"
+      - "templates/**"
 
 permissions:
   contents: write
@@ -22,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Optimize SVGs (build-only)
         run: |
@@ -30,52 +33,26 @@ jobs:
           mkdir -p icons-opt
           npx svgo -f icons -o icons-opt --config=svgo.config.js
 
-- name: Generate Font
-  run: |
-    mkdir -p dist
-    npx fantasticon@3.0.0 icons-opt/ \
-      --output dist/ \
-      --name euro-icons \
-      --font-types woff woff2 \
-      --asset-types css json \
-      --prefix esi \
-      --selector .esi \
-      --normalize \
-      --descent 200 \
-      --templates templates
-
-
-      - name: Generate meta.json
+      - name: Generate Font
         run: |
-          node - <<'NODE'
-          const fs = require('fs');
-
-          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-          version: process.env.RELEASE_TAG.replace(/^v/, ''),
-          const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
-
-          const meta = {
-            name: 'euro-icons',
-            version: pkg.version,
-            icons: Object.keys(icons).length,
-            license: 'Creative Commons Attribution 4.0 International (CC-BY-4.0)',
-            author: { name: 'Fabrice Willot', url: 'https://fabrice.willot.be' },
-            prefix: 'esi',
-            generatedAt: new Date().toISOString()
-          };
-
-          fs.writeFileSync('dist/meta.json', JSON.stringify(meta, null, 2) + '\n', 'utf8');
-          console.log('meta.json generated:', meta);
-          NODE
+          mkdir -p dist
+          npx fantasticon@3.0.0 icons-opt/ \
+            --output dist/ \
+            --name euro-icons \
+            --font-types woff woff2 \
+            --asset-types css json \
+            --prefix esi \
+            --selector .esi \
+            --normalize \
+            --descent 200 \
+            --templates templates
 
       - name: Commit and Push changes
         id: commit_step
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
           git add dist/
-
           if git commit -m "chore: rebuild icon font [skip ci]"; then
             git push
             echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
@@ -90,15 +67,50 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_sha: ${{ steps.commit_step.outputs.new_commit }}
-          # IMPORTANT: le tag-action lit la version depuis package.json
-          # et crée un tag du type v1.0.4, v1.0.5, etc.
+
+      - name: Generate meta.json
+        env:
+          RELEASE_TAG: ${{ steps.tag_version.outputs.new_tag }}
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+
+          const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
+          const versionTag = process.env.RELEASE_TAG || '';
+          const version = versionTag.replace(/^v/, '') || 'indisponible';
+
+          const meta = {
+            name: 'euro-icons',
+            version,
+            icons: Array.isArray(icons) ? icons.length : Object.keys(icons).length,
+            license: 'CC BY 4.0',
+            author: { name: 'Fabrice Willot', url: 'https://fabrice.willot.be' },
+            prefix: 'esi',
+            generatedAt: new Date().toISOString()
+          };
+
+          fs.writeFileSync('dist/meta.json', JSON.stringify(meta, null, 2) + '\n', 'utf8');
+          console.log('meta.json generated:', meta);
+          NODE
+
+      - name: Commit meta.json
+        id: commit_meta
+        run: |
+          git add dist/meta.json
+          if git commit -m "chore: update meta.json [skip ci]"; then
+            git push
+            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "No changes (meta.json)"
+            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          target_commitish: ${{ steps.commit_step.outputs.new_commit }}
+          target_commitish: ${{ steps.commit_meta.outputs.meta_commit }}
           body: |
             Nouvelle mise à jour des icônes.
             Version : ${{ steps.tag_version.outputs.new_tag }}
