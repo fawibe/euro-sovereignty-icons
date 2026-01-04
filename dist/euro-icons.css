@@ -13,3 +13,102 @@
 }
 
 /* Icon mappings */
+.esi-logo-tuta::before {
+  content: "\f101";
+}
+.esi-logo-qwant::before {
+  content: "\f102";
+}
+.esi-logo-protonmail::before {
+  content: "\f103";
+}
+.esi-logo-pixelfed::before {
+  content: "\f104";
+}
+.esi-logo-ovh::before {
+  content: "\f105";
+}
+.esi-logo-mistralai::before {
+  content: "\f106";
+}
+.esi-logo-malt::before {
+  content: "\f107";
+}
+.esi-logo-libreoffice::before {
+  content: "\f108";
+}
+.esi-logo-kesselmedia::before {
+  content: "\f109";
+}
+.esi-logo-kessel-media::before {
+  content: "\f10a";
+}
+.esi-logo-ecosia::before {
+  content: "\f10b";
+}
+.esi-logo-deepl::before {
+  content: "\f10c";
+}
+.esi-logo-brevo::before {
+  content: "\f10d";
+}
+.esi-logo-bereal::before {
+  content: "\f10e";
+}
+.esi-euro-hosted::before {
+  content: "\f10f";
+}
+.esi-euro-gdpr2-fr::before {
+  content: "\f110";
+}
+.esi-euro-gdpr::before {
+  content: "\f111";
+}
+.esi-euro-gdpr-sk::before {
+  content: "\f112";
+}
+.esi-euro-gdpr-si::before {
+  content: "\f113";
+}
+.esi-euro-gdpr-se::before {
+  content: "\f114";
+}
+.esi-euro-gdpr-ro::before {
+  content: "\f115";
+}
+.esi-euro-gdpr-pt::before {
+  content: "\f116";
+}
+.esi-euro-gdpr-pl::before {
+  content: "\f117";
+}
+.esi-euro-gdpr-nl::before {
+  content: "\f118";
+}
+.esi-euro-gdpr-mt::before {
+  content: "\f119";
+}
+.esi-euro-gdpr-lv::before {
+  content: "\f11a";
+}
+.esi-euro-gdpr-lt::before {
+  content: "\f11b";
+}
+.esi-euro-gdpr-it::before {
+  content: "\f11c";
+}
+.esi-euro-gdpr-ie::before {
+  content: "\f11d";
+}
+.esi-euro-gdpr-hu::before {
+  content: "\f11e";
+}
+.esi-euro-gdpr-fr::before {
+  content: "\f11f";
+}
+.esi-euro-gdpr-el::before {
+  content: "\f120";
+}
+.esi-euro-gdpr-cz::before {
+  content: "\f121";
+}
