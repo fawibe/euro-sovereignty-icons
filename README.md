@@ -1,4 +1,6 @@
 # Euro Sovereignty Icons
+![Version](https://img.shields.io/github/v/release/TON_NOM_UTILISATEUR/TON_REPO)
+![Icons](https://img.shields.io/badge/icons-24-blue)
 
 Une bibliothèque d'icônes moderne et légère dédiée à la souveraineté numérique européenne, à la protection des données (RGPD) et aux acteurs technologiques du continent.
 
