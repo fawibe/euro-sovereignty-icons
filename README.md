@@ -1,6 +1,9 @@
-# Euro Sovereignty Icons
-![Version](https://img.shields.io/github/v/release/TON_NOM_UTILISATEUR/TON_REPO)
-![Icons](https://img.shields.io/badge/icons-24-blue)
+<h1><img src="esi-logo.svg" width="30" height="30" alt="Euro-Sovereignty Icons Logo"> Euro Sovereignty Icons</h1>
+<p>
+  <img src="https://img.shields.io/github/v/release/fawibe/euro-sovereignty-icons" alt="Version">
+  <img src="https://img.shields.io/badge/icons-24-blue" alt="Icons Count">
+  <img src="https://img.shields.io/github/license/fawibe/euro-sovereignty-icons" alt="License">
+</p>
 
 Une bibliothèque d'icônes moderne et légère dédiée à la souveraineté numérique européenne, à la protection des données (RGPD) et aux acteurs technologiques du continent.
 
@@ -52,5 +55,7 @@ Si vous appréciez ce travail, vous pouvez :
 
 ## ⚖️ Licence
 
-Ce projet et ses icônes sont protégés par la licence **CC BY 4.0 - Fabrice Willot**. 
-Les fichiers de police générés (Webfonts) sont distribués sous licence **SIL OFL 1.1**.
+Ce projet est distribué sous deux types de licences :
+- **Code & Outils** : La structure, les scripts et les fichiers de configuration sont sous licence [MIT](LICENSE).
+- **Icônes & Design** : Les fichiers SVG et les polices générées sont sous licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) - Fabrice Willot.
+- Les fichiers de police générés (Webfonts) sont distribués sous licence **SIL OFL 1.1**.
