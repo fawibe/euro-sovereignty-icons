@@ -45,7 +45,7 @@ jobs:
             --selector .esi \
             --normalize \
             --descent 200 \
-            --template templates
+            --template ./templates
 
       - name: Commit and Push changes
         id: commit_step
