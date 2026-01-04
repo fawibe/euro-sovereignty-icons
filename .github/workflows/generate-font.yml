@@ -97,21 +97,42 @@ jobs:
           fi
           echo "final_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
+      - name: Generate Release Notes
+        id: release_notes
+        run: |
+          # Récupère la liste des icônes du commit précédent (si existant)
+          git checkout HEAD^1 -- dist/euro-icons.json || echo "{}" > old-icons.json
+          
+          node - <<'NODE'
+          const fs = require('fs');
+          const newIcons = Object.keys(JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8')));
+          let oldIcons = [];
+          try {
+            oldIcons = Object.keys(JSON.parse(fs.readFileSync('old-icons.json', 'utf8')));
+          } catch (e) {
+            try { oldIcons = Object.keys(JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'))); } catch(e) {}
+          }
+
+          const added = newIcons.filter(x => !oldIcons.includes(x));
+          
+          let body = "### 🚀 Mise à jour des icônes\n\n";
+          if (added.length > 0) {
+            body += "**Nouvelles icônes ajoutées :**\n";
+            added.forEach(icon => body += `- \`${icon}\`\n`);
+          } else {
+            body += "Mise à jour technique et optimisations.\n";
+          }
+          
+          fs.writeFileSync('release_body.md', body);
+          NODE
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           target_commitish: ${{ steps.commit_step.outputs.final_commit }}
-          body: |
-            🚀 Nouvelle mise à jour des icônes Euro-Sovereignty.
-            
-            **Contenu de cette release :**
-            - Polices Web (WOFF2, WOFF)
-            - Fichiers CSS et JSON mis à jour
-            - Documentation technique et licence incluses.
-            
-            Version : `${{ steps.tag_version.outputs.new_tag }}`
+          body_path: release_body.md
           files: |
             dist/*
         env:
