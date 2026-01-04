@@ -36,7 +36,7 @@ jobs:
       - name: Generate Font
         run: |
           mkdir -p dist
-          npx fantasticon@3.0.0 icons-opt/ -o dist/ -n euro-icons -t woff woff2 -a css json --prefix esi --selector .esi --normalize --descent 200 --template ./templates
+          npx fantasticon@3.0.0
 
       - name: Commit and Push changes
         id: commit_step
