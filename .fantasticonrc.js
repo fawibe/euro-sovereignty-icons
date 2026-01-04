@@ -1,10 +1,16 @@
 module.exports = {
-  inputDir: './icons', // dossier où sont vos SVG
+  inputDir: './icons-opt', // dossier des SVG optimisés
   outputDir: './dist',
-  fontTypes: ['woff2', 'woff'],
-  assetTypes: ['css', 'json', 'html'],
-  // Si vous utilisez un template personnalisé :
+  name: 'euro-icons',
+  fontTypes: ['woff', 'woff2'],
+  assetTypes: ['css', 'json'],
+  prefix: 'esi',
+  selector: '.esi',
+  normalize: true,
+  descent: 200,
+  // C'est ici qu'on définit le dossier des templates
   templates: {
-    css: './path/to/your/template.css.hbs'
+    css: './templates/css.hbs',   // Adaptez le nom du fichier si nécessaire
+    html: './templates/html.hbs'  // Si vous en avez un pour la preview
   }
 };
