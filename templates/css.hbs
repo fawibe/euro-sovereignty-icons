@@ -13,8 +13,8 @@
 }
 
 /* Icon mappings */
-{{# each glyphs }}
-.{{ ../prefix }}-{{ name }}::before {
-  content: "{{ codepoint }}";
+{{#each codepoints}}
+.{{../prefix}}-{{@key}}::before {
+  content: "\\{{codepoint this}}";
 }
-{{/ each }}
+{{/each}}
