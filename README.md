@@ -2,7 +2,7 @@
 <p>
   <img src="https://img.shields.io/github/v/release/fawibe/euro-sovereignty-icons" alt="Version">
   <img src="https://img.shields.io/badge/icons-24-blue" alt="Icons Count">
-  <img src="https://img.shields.io/github/license/fawibe/euro-sovereignty-icons" alt="License">
+  <img src="https://img.shields.io/badge/license-MIT%20%2F%20CC%20BY%204.0-green" alt="License">
 </p>
 
 Une bibliothèque d'icônes moderne et légère dédiée à la souveraineté numérique européenne, à la protection des données (RGPD) et aux acteurs technologiques du continent.
