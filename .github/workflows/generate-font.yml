@@ -9,6 +9,7 @@ on:
       - "package.json"
       - "svgo.config.js"
       - "templates/**"
+      - "doc/**"
 
 permissions:
   contents: write
@@ -38,26 +39,17 @@ jobs:
           mkdir -p dist
           npx fantasticon@3.0.0
 
-      - name: Commit and Push changes
-        id: commit_step
+      - name: Copy Documentation to Dist
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dist/
-          if git commit -m "chore: rebuild icon font [skip ci]"; then
-            git push
-            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          else
-            echo "No changes"
-            echo "new_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          fi
+          # On s'assure que le fichier existe avant de copier
+          if [ -f doc/README.md ]; then cp doc/README.md dist/README.md; fi
+          if [ -f LICENSE ]; then cp LICENSE dist/LICENSE; fi
 
       - name: Create Version Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_sha: ${{ steps.commit_step.outputs.new_commit }}
 
       - name: Generate meta.json
         env:
@@ -65,10 +57,17 @@ jobs:
         run: |
           node - <<'NODE'
           const fs = require('fs');
-
-          const icons = JSON.parse(fs.readFileSync('dist/euro-icons.json', 'utf8'));
-          const versionTag = process.env.RELEASE_TAG || '';
-          const version = versionTag.replace(/^v/, '') || 'indisponible';
+          
+          // Lecture du fichier généré par Fantasticon
+          const iconsPath = 'dist/euro-icons.json';
+          if (!fs.existsSync(iconsPath)) {
+            console.error('Erreur: euro-icons.json introuvable');
+            process.exit(1);
+          }
+          
+          const icons = JSON.parse(fs.readFileSync(iconsPath, 'utf8'));
+          const versionTag = process.env.RELEASE_TAG || 'v0.0.0';
+          const version = versionTag.replace(/^v/, '');
 
           const meta = {
             name: 'euro-icons',
@@ -81,34 +80,39 @@ jobs:
           };
 
           fs.writeFileSync('dist/meta.json', JSON.stringify(meta, null, 2) + '\n', 'utf8');
-          console.log('meta.json generated:', meta);
+          console.log('meta.json generated with version:', version);
           NODE
 
-      - name: Commit meta.json
-        id: commit_meta
+      - name: Commit and Push changes
+        id: commit_step
         run: |
-          git add dist/meta.json
-          if git commit -m "chore: update meta.json [skip ci]"; then
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add dist/
+          
+          # On commit tout d'un coup (Font + CSS + meta.json + README)
+          if git commit -m "chore: release ${{ steps.tag_version.outputs.new_tag }} [skip ci]"; then
             git push
-            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          else
-            echo "No changes (meta.json)"
-            echo "meta_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           fi
+          echo "final_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          target_commitish: ${{ steps.commit_meta.outputs.meta_commit }}
+          target_commitish: ${{ steps.commit_step.outputs.final_commit }}
           body: |
-            Nouvelle mise à jour des icônes.
-            Version : ${{ steps.tag_version.outputs.new_tag }}
+            🚀 Nouvelle mise à jour des icônes Euro-Sovereignty.
+            
+            **Contenu de cette release :**
+            - Polices Web (WOFF2, WOFF)
+            - Fichiers CSS et JSON mis à jour
+            - Documentation technique et licence incluses.
+            
+            Version : `${{ steps.tag_version.outputs.new_tag }}`
           files: |
-            dist/euro-icons.css
-            dist/euro-icons.woff2
-            dist/euro-icons.json
-            dist/meta.json
+            dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
