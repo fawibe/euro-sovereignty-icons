@@ -1,76 +1,15 @@
-@font-face {
-  font-family: "euro-icons";
-  src:
-    url("./euro-icons.woff2?7f1306428a990d50ce5c27a492434885") format("woff2"),
-    url("./euro-icons.woff?7f1306428a990d50ce5c27a492434885") format("woff");
-  font-display: block;
-}
-
-/* L’élément */
+/* Base icon class */
 .esi {
   display: inline-block;
-  line-height: 1;
-  vertical-align: -0.125em;
-}
-
-/* Le glyphe */
-.esi::before {
-  font-family: "euro-icons" !important;
+  font-family: "euro-icons";
   font-style: normal;
-  font-weight: normal !important;
+  font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  display: inline-block; /* important */
+  vertical-align: -0.125em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.esi.esi-logo-tuta:before {
-    content: "\f101";
-}
-.esi.esi-logo-qwant:before {
-    content: "\f102";
-}
-.esi.esi-logo-protonmail:before {
-    content: "\f103";
-}
-.esi.esi-logo-pixelfed:before {
-    content: "\f104";
-}
-.esi.esi-logo-ovh:before {
-    content: "\f105";
-}
-.esi.esi-logo-mistralai:before {
-    content: "\f106";
-}
-.esi.esi-logo-malt:before {
-    content: "\f107";
-}
-.esi.esi-logo-libreoffice:before {
-    content: "\f108";
-}
-.esi.esi-logo-kesselmedia:before {
-    content: "\f109";
-}
-.esi.esi-logo-ecosia:before {
-    content: "\f10a";
-}
-.esi.esi-logo-deepl:before {
-    content: "\f10b";
-}
-.esi.esi-logo-brevo:before {
-    content: "\f10c";
-}
-.esi.esi-logo-bereal:before {
-    content: "\f10d";
-}
-.esi.esi-euro-gdpr2-fr:before {
-    content: "\f10e";
-}
-.esi.esi-euro-gdpr:before {
-    content: "\f10f";
-}
-.esi.esi-euro-gdpr-fr:before {
-    content: "\f110";
-}
+/* Icon mappings */
