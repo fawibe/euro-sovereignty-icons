@@ -1,7 +1,7 @@
 @font-face {
   font-family: "euro-icons";
-  src: url("./euro-icons.woff?44839e5292120c85613d7cdd00e66c41") format("woff"),
-url("./euro-icons.woff2?44839e5292120c85613d7cdd00e66c41") format("woff2");
+  src: url("./euro-icons.woff?8785158ea0c43e09cb34f8e9ef5ae182") format("woff"),
+url("./euro-icons.woff2?8785158ea0c43e09cb34f8e9ef5ae182") format("woff2");
   font-display: block; /* Évite le texte invisible pendant le chargement */
 }
 
