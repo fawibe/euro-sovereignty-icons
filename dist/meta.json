@@ -1,6 +1,6 @@
 {
   "name": "euro-icons",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "icons": 33,
   "license": "CC BY 4.0",
   "author": {
@@ -8,5 +8,5 @@
     "url": "https://fabrice.willot.be"
   },
   "prefix": "esi",
-  "generatedAt": "2026-01-05T15:22:50.248Z"
+  "generatedAt": "2026-01-06T10:29:46.969Z"
 }
