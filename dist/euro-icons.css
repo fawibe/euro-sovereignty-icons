@@ -1,7 +1,7 @@
 @font-face {
   font-family: "euro-icons";
-  src: url("./euro-icons.woff?5af6a8a62f7989f27fc67c58e026bd4f") format("woff"),
-url("./euro-icons.woff2?5af6a8a62f7989f27fc67c58e026bd4f") format("woff2");
+  src: url("./euro-icons.woff?aeb8a92a35ab7974e7df69f77491c97f") format("woff"),
+url("./euro-icons.woff2?aeb8a92a35ab7974e7df69f77491c97f") format("woff2");
   font-display: block; /* Évite le texte invisible pendant le chargement */
 }
 
@@ -72,81 +72,90 @@ url("./euro-icons.woff2?5af6a8a62f7989f27fc67c58e026bd4f") format("woff2");
 .esi-logo-bereal:before {
   content: "\f10e";
 }
-.esi-euro-hostedeu:before {
+.esi-euro-notrack:before {
   content: "\f10f";
 }
-.esi-euro-hosted:before {
+.esi-euro-nocockie:before {
   content: "\f110";
 }
-.esi-euro-gdpr2-fr:before {
+.esi-euro-ineuro:before {
   content: "\f111";
 }
-.esi-euro-gdpr:before {
+.esi-euro-hostedeu:before {
   content: "\f112";
 }
-.esi-euro-gdpr-sk:before {
+.esi-euro-hosted:before {
   content: "\f113";
 }
-.esi-euro-gdpr-si:before {
+.esi-euro-gdpr2-fr:before {
   content: "\f114";
 }
-.esi-euro-gdpr-se:before {
+.esi-euro-gdpr:before {
   content: "\f115";
 }
-.esi-euro-gdpr-ro:before {
+.esi-euro-gdpr-sk:before {
   content: "\f116";
 }
-.esi-euro-gdpr-pt:before {
+.esi-euro-gdpr-si:before {
   content: "\f117";
 }
-.esi-euro-gdpr-pl:before {
+.esi-euro-gdpr-se:before {
   content: "\f118";
 }
-.esi-euro-gdpr-nl:before {
+.esi-euro-gdpr-ro:before {
   content: "\f119";
 }
-.esi-euro-gdpr-mt:before {
+.esi-euro-gdpr-pt:before {
   content: "\f11a";
 }
-.esi-euro-gdpr-lv:before {
+.esi-euro-gdpr-pl:before {
   content: "\f11b";
 }
-.esi-euro-gdpr-lt:before {
+.esi-euro-gdpr-nl:before {
   content: "\f11c";
 }
-.esi-euro-gdpr-it:before {
+.esi-euro-gdpr-mt:before {
   content: "\f11d";
 }
-.esi-euro-gdpr-ie:before {
+.esi-euro-gdpr-lv:before {
   content: "\f11e";
 }
-.esi-euro-gdpr-hu:before {
+.esi-euro-gdpr-lt:before {
   content: "\f11f";
 }
-.esi-euro-gdpr-hr:before {
+.esi-euro-gdpr-it:before {
   content: "\f120";
 }
-.esi-euro-gdpr-fr:before {
+.esi-euro-gdpr-ie:before {
   content: "\f121";
 }
-.esi-euro-gdpr-es:before {
+.esi-euro-gdpr-hu:before {
   content: "\f122";
 }
-.esi-euro-gdpr-el:before {
+.esi-euro-gdpr-hr:before {
   content: "\f123";
 }
-.esi-euro-gdpr-ee:before {
+.esi-euro-gdpr-fr:before {
   content: "\f124";
 }
-.esi-euro-gdpr-dk:before {
+.esi-euro-gdpr-es:before {
   content: "\f125";
 }
-.esi-euro-gdpr-de:before {
+.esi-euro-gdpr-el:before {
   content: "\f126";
 }
-.esi-euro-gdpr-cz:before {
+.esi-euro-gdpr-ee:before {
   content: "\f127";
 }
-.esi-euro-gdpr-bg:before {
+.esi-euro-gdpr-dk:before {
   content: "\f128";
+}
+.esi-euro-gdpr-de:before {
+  content: "\f129";
+}
+.esi-euro-gdpr-cz:before {
+  content: "\f12a";
+}
+.esi-euro-gdpr-bg:before {
+  content: "\f12b";
 }
